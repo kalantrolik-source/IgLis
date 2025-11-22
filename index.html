@@ -1,0 +1,755 @@
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-t>IgLis — Leather Keychains</title>
+    
+    <style>
+        /* Импорт шрифта */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            /* Установка фонового изображения */
+            background: url('https://imgpx.com/zl6kYoLbPYaK.jpg') center/cover no-repeat fixed;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* === ФИКСЫ ОТСТУПОВ В INTRO/STORE === */
+        
+        /* Фикс: Добавляем отступы для заголовка и основного текста в секции Intro/Store, чтобы они не наезжали */
+        [data-intro-title] {
+            margin-bottom: 15px !important; /* Увеличиваем отступ под заголовком */
+            line-height: 1.2;
+        }
+
+        [data-intro-text] {
+            margin-top: 15px !important; /* Увеличиваем отступ над текстом */
+            line-height: 1.5; /* Улучшаем читаемость */
+            display: block; /* Убеждаемся, что это блочный элемент */
+        }
+        
+        /* Фикс: Добавляем отступы для заголовков в секции About */
+        #about h2, #about h3 {
+            margin-top: 20px !important;
+            margin-bottom: 15px !important;
+            line-height: 1.2;
+        }
+
+        /* Фикс: Улучшаем читаемость списков на маленьких экранах */
+        .content p {
+            line-height: 1.5; 
+            margin-bottom: 10px;
+        }
+        /* ==================================== */
+
+        /* Шапка сайта */
+        header {
+            background: rgba(0, 0, 0, 0.75);
+            text-align: center;
+            padding: 25px;
+            font-size: 2em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Кнопка меню */
+        .menu-btn {
+            position: static;
+            font-size: 26px;
+            color: white;
+            background: rgba(0,0,0,0.75);
+            border: none;
+            padding: 10px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            z-index: 1001;
+            transition: 0.2s;
+        }
+
+        .menu-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Боковая панель (меню) */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow-x: hidden;
+            transition: 0.3s;
+            padding-top: 80px;
+            z-index: 1000;
+        }
+
+        .sidebar a {
+            padding: 12px 25px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #f1f1f1;
+            display: block;
+            transition: 0.2s;
+        }
+
+        .sidebar a:hover {
+            background: #ba8b02;
+            color: #fff;
+        }
+
+        /* Контейнер с основным содержимым */
+        .content {
+            min-height: calc(100vh - 100px);
+            padding: 80px 20px;
+            text-align: center;
+            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.5);
+            margin: 0 auto;
+            max-width: 1000px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            animation: fadeIn 0.6s ease;
+        }
+
+        /* Заголовки */
+        h2 {
+            color: #ffcc00;
+            margin-bottom: 10px;
+        }
+
+        p {
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+
+        /* Секция введения в магазине */
+        .store-intro {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            animation: fadeIn 0.8s ease;
+        }
+
+        .store-intro p {
+            font-size: 1.05em;
+            color: #f5f5f5;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Сетка товаров */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        /* Карточка товара */
+        .product {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+            transition: 0.3s;
+        }
+
+        .product:hover {
+            transform: scale(1.03);
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .product img {
+            width: 100%;
+            /* Изначальный стиль для десктопа: */
+            height: 500px; 
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .product h3 {
+            color: #ffcc00;
+            margin-bottom: 5px;
+        }
+
+        .product p {
+            font-size: 1em;
+            color: #ddd;
+        }
+
+        /* Контейнер контактов внизу страницы магазина */
+        .store-contacts {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Подвал сайта */
+        footer {
+            background: rgba(0,0,0,0.85);
+            color: #ccc;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Анимация появления */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Селектор языка */
+        .lang-select {
+            position: static;
+            z-index: 3000;
+        }
+
+        .lang-select select {
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
+            background: rgba(255,255,255,0.95);
+            color: #000;
+            cursor: pointer;
+        }
+
+        /* === МЕДИА-ЗАПРОСЫ ДЛЯ АДАПТИВНОСТИ (Все ваши новые стили) === */
+
+        /* ДЕСКТОП: Фикс для ровных карточек на ПК (ширина более 900px) */
+        @media only screen and (min-width: 901px) {
+            .products {
+                display: grid !important;
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                gap: 25px;
+                align-items: stretch !important;
+                row-gap: 40px !important; /* Увеличенный вертикальный промежуток */
+                margin-bottom: 40px !important;
+            }
+
+            .product {
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                height: 100% !important;
+                text-align: center !important;
+                padding: 15px !important;
+                margin-bottom: 10px !important;
+            }
+
+            .product img {
+                width: 100% !important;
+                height: 400px !important;
+                object-fit: cover !important;
+                border-radius: 10px !important;
+                margin-bottom: 10px !important;
+            }
+
+            .product h3 {
+                min-height: 45px !important; /* Одинаковая высота заголовка */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 8px 0 !important;
+            }
+
+            .product p {
+                margin-top: auto !important;
+                font-size: 1em !important;
+                color: #ddd !important;
+            }
+        }
+
+        /* МОБИЛЬНЫЙ: Идеальная адаптация для мобильных устройств (ширина до 900px) */
+        @media only screen and (max-width: 900px) {
+            /* --- ФИКСЫ ДЛЯ ГАМБУРГЕРА И ЯЗЫКА (для решения проблемы наложения) --- */
+            .menu-btn {
+                left: 10px;
+                top: 10px;
+                padding: 8px 12px;
+            }
+
+            .lang-select {
+                top: 10px;
+                right: 10px;
+            }
+
+            .lang-select select {
+                padding: 6px 10px;
+            }
+            /* -------------------------------------------------------------------- */
+
+            .products {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 15px !important;
+            }
+
+            .product {
+                width: 95% !important;
+                max-width: 380px !important;
+                margin: 0 auto !important;
+                border-radius: 14px !important;
+                padding: 12px !important;
+                box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35) !important;
+            }
+
+            .product img {
+                width: 100% !important;
+                /* Аккуратная адаптация изображений под телефоны */
+                height: auto !important;
+                aspect-ratio: 3 / 5 !important;
+                object-fit: cover !important;
+                border-radius: 10px !important;
+                margin-bottom: 10px !important;
+            }
+            
+            /* Для "бутылочной" карточки делаем соотношение сторон чуть выше */
+            .product.wide img {
+                aspect-ratio: 2 / 3 !important;
+            }
+
+            .product h3 {
+                font-size: 1em !important;
+                margin-bottom: 6px !important;
+                text-align: center !important;
+            }
+
+            .product p {
+                font-size: 0.9em !important;
+                text-align: center !important;
+                margin: 0 !important;
+            }
+
+            header {
+                font-size: 1.2em !important;
+                padding: 15px 10px !important;
+                flex-direction: row;
+            }
+
+            .content {
+                padding: 50px 10px !important;
+            }
+
+            .store-intro {
+                padding: 15px !important;
+                font-size: 0.95em !important;
+            }
+        }
+        
+        /* Дополнительные мобильные стили (ширина до 700px) */
+        @media (max-width: 700px) {
+            .lang-select select {
+                font-size: 14px;
+                padding: 6px 10px;
+            }
+
+            #contacts p {
+                font-size: 1.1em !important;
+            }
+            
+            #contacts h2 {
+                font-size: 1.5em !important;
+            }
+            
+            #about {
+                padding: 20px !important; /* Чуть уже поля, чтобы влезал текст */
+            }
+
+            #about p {
+                font-size: 1em !important;
+                line-height: 1.5em !important;
+            }
+        }
+        
+        /* Черный текст и синие ссылки в разделе About Us */
+        #about {
+            color: #000 !important;
+            /* Устанавливаем белый фон для секции "О нас" */
+            background: rgba(255, 255, 255, 0.9) !important; 
+        }
+
+        #about h2,
+        #about h3,
+        #about p,
+        #about b {
+            color: #000 !important;
+        }
+
+        #about a {
+            color: #EB2F0E !important; /* Классический синий цвет ссылки */
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        #about a:hover {
+            color: #0056b3 !important; /* Потемнее при наведении */
+        }
+        
+        /* Фикс переноса текста в About Us */
+        #about p {
+            word-break: keep-all; /* Не ломает слова */
+            white-space: normal; /* Сохраняет обычные пробелы */
+        }
+/* --- Стили для плавающей кнопки --- */
+.feedback-fab {
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+    background-color: #ffcc00;
+    color: #000;
+    font-size: 30px; /* Размер шрифта для ПК */
+    font-weight: 600;
+    line-height: 1.3;
+    border-radius: 50%;
+    width: 300px; /* Размер для ПК */
+    height: 300px; /* Размер для ПК */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    z-index: 1000;
+    transition: transform 0.2s ease, width 0.3s ease, height 0.3s ease; /* Добавлена анимация размера */
+}
+.feedback-fab:hover {
+    transform: scale(1.05);
+}
+
+/* --- Адаптация кнопки для мобильных устройств --- */
+@media (max-width: 900px) {
+    .feedback-fab {
+        width: 120px; /* Уменьшенный размер для мобильных */
+        height: 120px; /* Уменьшенный размер для мобильных */
+        font-size: 18px; /* Уменьшенный шрифт для мобильных */
+        right: 20px;
+        bottom: 20px;
+    }
+}
+    </style>
+</head>
+<body>
+<a href="#" id="feedback-fab" class="feedback-fab" data-t>Feedback</a>
+    <header>
+        <button id="menuBtn" class="menu-btn">☰</button>
+        <div data-t>IgLis — Leather Keychains</div>
+        <div class="lang-select">
+            <select id="lang-switcher">
+                <option value="en">English</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+                <option value="it">Italiano</option>
+                <option value="es">Español</option>
+                <option value="pl">Polski</option>
+            </select>
+        </div>
+    </header>
+
+    <div id="sidebar" class="sidebar">
+        <a href="#" onclick="showSection('store')" data-t>🛍️ Store</a>
+        <a href="#" onclick="showSection('about')" data-t>ℹ️ About Us</a>
+        <a href="#" onclick="showSection('contacts')" data-t>📞 Contacts</a>
+        <a href="#" onclick="showSection('feedback')" data-t>📧 Feedback</a>
+    </div>
+
+    <div id="store" class="content">
+
+        <div class="store-intro" style="text-align:center;">
+            <img src="https://imgpx.com/tJhbx8EqI8rI.png"  
+                alt="Store Logo"  
+                style="max-width:150px; margin-bottom:20px; padding:10px; background:white; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.4);">
+
+            <h2 style="margin-bottom:20px; color:#ffcc00;" data-intro-title data-t>We create gift leather keychains and accessories</h2>
+            <p data-intro-text data-t>
+                for events, event agents, hotels, tour operators, winegrowers and photographers.<br><br>
+                <b>Branding:</b> laser engraving or foil stamping — your logo looks stylish and professional.<br>
+                You can choose a design from our ready-made bases or customize your own.<br>
+                <b>Colour, size and finish</b> — your choice.<br>
+                <b>Minimum quantity:</b> 25 pcs.
+            </p>
+        </div>
+        
+        <h2 data-t>Our Store</h2>
+
+        <div class="products">
+            <div class="product">
+                <img src="https://imgpx.com/HY8Q0lkMa6VC.jpg" alt="Keychain 1">
+                <h3 data-t>Flat leather keychain with engraving/embossing</h3>
+                <p data-t>Price: from 7$</p>
+            </div>
+            <div class="product">
+                <img src="https://imgpx.com/50UxwE5aG0fQ.jpg" alt="Keychain 2">
+                <h3 data-t>Flat leather keychain with engraving/embossing on one side</h3>
+                <p data-t>Price: from 7$</p>
+            </div>
+            <div class="product">
+                <img src="https://imgpx.com/qAglSHl0oRrq.jpg" alt="Keychain 3">
+                <h3 data-t>Flat leather keychain with engraving/embossing on two sides</h3>
+                <p data-t>Price: from 8$</p>
+            </div>
+            <div class="product">
+                <img src="https://imgpx.com/4k6n2Nl4Ziy2.jpg" alt="Keychain 4">
+                <h3 data-t>Flat leather keychain with leather overlay with engraving/embossing on one side</h3>
+                <p data-t>Price: from 8$</p>
+            </div>
+            <div class="product">
+                <img src="https://imgpx.com/2ucVHno70PQa.jpg" alt="Keychain 5">
+                <h3 data-t>Flat leather keychain with leather overlays with engraving/embossing on both sides</h3>
+                <p data-t>Price: from 9$</p>
+            </div>
+            <div class="product">
+                <img src="https://imgpx.com/Rpc6PxLupYxD.jpg" alt="Keychain 6">
+                <h3 data-t>Leather keychain case for flash drive (including 4G flash drive)</h3>
+                <p data-t>Price: from 9$</p>
+            </div>
+            <div class="product">
+                <img src="https://imgpx.com/7WF4pTN1gnmK.jpg" alt="Keychain 7">
+                <h3 data-t>3D leather keychain</h3>
+                <p data-t>Price: from 9$</p>
+            </div>
+            <div class="product">
+                <img src="https://imgpx.com/mC2hBILv2fgO.jpg" alt="Keychain 8">
+                <h3 data-t>Leather keychain with metal insert with engraving on one side</h3>
+                <p data-t>Price: from 8$</p>
+            </div>
+            <div class="product">
+                <img src="https://imgpx.com/9sCPn3rGr7F9.jpg" alt="Keychain 9">
+                <h3 data-t>Metal keychain with engraving on one side</h3>
+                <p data-t>Price: from 7$</p>
+            </div>
+            <div class="product">
+                <img src="https://imgpx.com/b9N5s8j2d0eZ.jpg" alt="Keychain 10 (Metal with two sides engraving)"> 
+                <h3 data-t>Metal keychain with engraving on both sides</h3>
+                <p data-t>Price: from 8$</p>
+            </div>
+            <div class="product wide">
+                <img src="https://imgpx.com/PinqjUNuhzWk.jpg" alt="Leather Gift Bag for Bottles 1">
+                <h3 data-t>Leather gift bags for bottles of wine (assortment 1)</h3>
+                <p data-t>Price: from 40$</p>
+            </div>
+            <div class="product wide">
+                <img src="https://imgpx.com/fqRvqQfxMKYx.jpg" alt="Leather Gift Bag for Bottles 2">
+                <h3 data-t>Leather gift bags for bottles of wine (assortment 2)</h3>
+                <p data-t>Price: from 40$</p>
+            </div>
+        </div>
+
+        <div class="store-contacts">
+            <h2 data-t>Contact Us</h2>
+            <p>📸 <b data-instagram-label data-t>Instagram:</b>
+                <a href="https://instagram.com/leather.gifts.by.iglis" target="_blank">@leather.gifts.by.iglis</a>
+            </p>
+            <p>📩 <b data-messenger-label data-t>Messenger:</b>
+                <a href="https://www.messenger.com/t/748584538334235/" target="_blank">+380 98 387 80 23</a>
+            </p>
+        </div>
+    </div>
+
+    <div id="feedback" class="content" style="display:none;">
+        <h2 data-t>Feedback</h2>
+        <p data-t>We would love to hear your thoughts, suggestions, or concerns about our products and services.</p>
+        <form id="feedback-form" action="https://formspree.io/f/xdkjlenp" method="POST" style="text-align: left; max-width: 600px; margin: auto;">
+            <div style="margin-bottom: 15px;">
+                <label for="name" data-t>Name:</label>
+                <input type="text" id="name" name="name" required style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="email" data-t>Email:</label>
+                <input type="email" id="email" name="email" required style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="message" data-t>Message:</label>
+                <textarea id="message" name="message" rows="6" required style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;"></textarea>
+            </div>
+            <div style="text-align: center;">
+                <button type="submit" style="padding: 10px 20px; border-radius: 5px; border: none; background-color: #ffcc00; color: #000; font-size: 16px; cursor: pointer;" data-t>Send</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="about" class="content" style="display:none; text-align:center;">
+        <h2 data-t>About Us</h2>
+        <p data-t>IgLis is a family workshop where leather goods with character are born. We create things that combine aesthetics, practicality and the soul of a craftsman. Each of our products is handmade from premium-quality genuine leather, with attention to the smallest details.</p>
+        <h3 data-t>Why choose IgLis?</h3>
+        <p data-t>
+            Our leather key chains and accessories are chosen as:<br>
+            🎁 corporate souvenirs, <br/>
+            💼 gifts for clients and partners, <br/>
+            📸 stylish details for events and photo shoots and for branding — with laser engraving or foil stamping of a logo, name, date or image.
+        </p>
+        <p data-t>
+            We value an individual approach, so each order is created for the client: you choose the color, shape, logo, packaging — we implement your idea with precision. We can make a sample, provide photo/video report and ensure accuracy.
+        </p>
+        <p data-t>
+            ⏱️ Production takes 7–10 days <br/>
+            📦 Minimum order — 25 pcs <br/>
+            🚚 Delivery — throughout Europe and America.
+        </p>
+        <h3 data-t>🎯 Our mission</h3>
+        <p data-t>
+            To help you find the perfect gift or souvenir for any event — corporate party, team building, wedding or business meeting. We create emotions, not just things.
+        </p>
+        <p data-t>
+            🌍 We work from Ukraine. We may not yet speak English perfectly, but we understand our customers perfectly — through respect, attention and sincere attitude. Write to us in Instagram or Messenger.
+        </p>
+    </div>
+
+    <div id="contacts" class="content" style="display:none;">
+        <h2 data-t>Contact Us</h2>
+        <p data-t>If you have any questions or would like to place an order, please don't hesitate to contact us. We are always happy to help!</p>
+        <p>
+            <b data-t>Instagram:</b> 
+            <a href="https://instagram.com/leather.gifts.by.iglis" target="_blank">@leather.gifts.by.iglis</a>
+        </p>
+        <p>
+            <b data-t>Messenger:</b> 
+            <a href="https://www.messenger.com/t/748584538334235/" target="_blank">+380 98 387 80 23</a>
+        </p>
+         </div>
+
+    <footer>
+        <p data-t>© 2024 IgLis. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // IIFE to avoid global scope pollution
+        (() => {
+            const MAIN_LANG = 'en';
+            const SUPPORTED_LANGS = ['en', 'fr', 'de', 'it', 'es'];
+            const CACHE_KEY = 'i18n_cache';
+            const LANG_STORAGE_KEY = 'user_lang';
+
+            const $ = s => document.querySelector(s);
+            const $$ = s => document.querySelectorAll(s);
+
+            // --- State and Cache Management ---
+            let translationsCache = JSON.parse(localStorage.getItem(CACHE_KEY)) || {};
+            let currentLang = localStorage.getItem(LANG_STORAGE_KEY) || MAIN_LANG;
+
+            // --- Translation Functions ---
+            async function googleTranslate(text, targetLang) {
+                if (targetLang === MAIN_LANG) return text;
+                const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${MAIN_LANG}&tl=${targetLang}&dt=t&q=${encodeURIComponent(text)}`;
+                try {
+                    const response = await fetch(url);
+                    if (!response.ok) return text; // Fallback to original text on error
+                    const data = await response.json();
+                    return data[0].map(item => item[0]).join('');
+                } catch (error) {
+                    console.error("Translation failed:", error);
+                    return text; // Fallback to original text on error
+                }
+            }
+
+            async function getTranslation(text, lang) {
+                if (lang === MAIN_LANG) return text;
+                const cacheForLang = translationsCache[lang] || {};
+                if (cacheForLang[text]) {
+                    return cacheForLang[text];
+                }
+                const translatedText = await googleTranslate(text, lang);
+                if (!translationsCache[lang]) {
+                    translationsCache[lang] = {};
+                }
+                translationsCache[lang][text] = translatedText;
+                localStorage.setItem(CACHE_KEY, JSON.stringify(translationsCache));
+                return translatedText;
+            }
+
+            async function applyTranslations(lang) {
+                currentLang = lang;
+                localStorage.setItem(LANG_STORAGE_KEY, lang);
+                $('#lang-switcher').value = lang;
+
+                const elements = $$('[data-t]');
+                for (const el of elements) {
+                    const originalText = el.dataset.originalText || el.textContent.trim();
+                    if (!el.dataset.originalText) {
+                        el.dataset.originalText = originalText;
+                    }
+                    const translatedText = await getTranslation(originalText, lang);
+                    el.textContent = translatedText;
+                }
+            }
+
+            // --- UI Setup and Event Handlers ---
+            function setupSidebar() {
+                const menuBtn = $('#menuBtn');
+                const sidebar = $('#sidebar');
+                if (menuBtn && sidebar) {
+                    menuBtn.addEventListener('click', () => {
+                        sidebar.style.width = sidebar.style.width === '250px' ? '0' : '250px';
+                    });
+
+                    // Close sidebar when clicking outside
+                    document.addEventListener('click', (e) => {
+                        if (!sidebar.contains(e.target) && !menuBtn.contains(e.target)) {
+                            sidebar.style.width = '0';
+                        }
+                    });
+                }
+            }
+
+            function setupLanguageSwitcher() {
+                const langSwitcher = $('#lang-switcher');
+                if (langSwitcher) {
+                    langSwitcher.addEventListener('change', (e) => {
+                        applyTranslations(e.target.value);
+                    });
+                }
+            }
+            
+            function showSection(sectionId) {
+                // Hide all content sections
+                $$('.content').forEach(section => {
+                    section.style.display = 'none';
+                });
+
+                // Show the selected section
+                const sectionToShow = $(`#${sectionId}`);
+                if (sectionToShow) {
+                    sectionToShow.style.display = 'block';
+                }
+                
+                // Close the sidebar after selection
+                $('#sidebar').style.width = '0';
+            }
+
+            // --- Initialization ---
+            document.addEventListener('DOMContentLoaded', () => {
+                setupSidebar();
+                setupLanguageSwitcher();
+                applyTranslations(currentLang);
+                
+                // Make showSection globally available
+                window.showSection = showSection;
+            });
+
+        })();
+    const feedbackFab = document.getElementById('feedback-fab');
+    if (feedbackFab) {
+        feedbackFab.addEventListener('click', (e) => {
+            e.preventDefault();
+            showSection('feedback');
+            document.getElementById('feedback').scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+    </script>
+
+</body>
