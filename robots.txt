@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ig-lis.vercel.app/sitemap.xml
