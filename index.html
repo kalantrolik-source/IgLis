@@ -1,4 +1,5 @@
 <head>
+    <meta name="keywords" content="porte-clés en cuir, articles promotionnels personnalisés, articles de marque, maroquinerie artisanale, cadeaux d'entreprise, souvenirs d'affaires, fabricant en gros, gravure laser, logo personnalisé, atelier familial, merchandise pour événements, cuir véritable">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-t>IgLis — Leather Keychains</title>
@@ -584,7 +585,7 @@
           allow="geolocation; microphone; camera"
           src="https://form.jotform.com/253264670677062"
           frameborder="0"
-          style="min-width: 100%; height: 900px; border:none;"
+          style="min-width: 100%; height: 600px; border:none;"
           scrolling="no"
         >
         </iframe>
@@ -758,5 +759,57 @@
         });
     }
     </script>
-
+    <script>
+        // Перенаправление на языковые версии
+        document.getElementById('lang-switcher').addEventListener('change', function() {
+            const lang = this.value;
+            const baseUrl = window.location.href.split('/').slice(0, -1).join('/');
+            
+            switch(lang) {
+                case 'en':
+                    window.location.href = baseUrl + '/index (16).html';
+                    break;
+                case 'de':
+                    window.location.href = baseUrl + '/de.html';
+                    break;
+                case 'fr':
+                    window.location.href = baseUrl + '/fr.html';
+                    break;
+                case 'pl':
+                    window.location.href = baseUrl + '/pl.html';
+                    break;
+                case 'es':
+                    window.location.href = baseUrl + '/es.html';
+                    break;
+                case 'it':
+                    window.location.href = baseUrl + '/it.html';
+                    break;
+            }
+        });
+        
+        // Установка текущего языка в селекторе
+        const currentPage = window.location.pathname.split('/').pop();
+        const langSwitcher = document.getElementById('lang-switcher');
+        
+        switch(currentPage) {
+            case 'index (16).html':
+                langSwitcher.value = 'en';
+                break;
+            case 'de.html':
+                langSwitcher.value = 'de';
+                break;
+            case 'fr.html':
+                langSwitcher.value = 'fr';
+                break;
+            case 'pl.html':
+                langSwitcher.value = 'pl';
+                break;
+            case 'es.html':
+                langSwitcher.value = 'es';
+                break;
+            case 'it.html':
+                langSwitcher.value = 'it';
+                break;
+        }
+    </script>
 </body>
